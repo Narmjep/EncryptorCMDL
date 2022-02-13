@@ -1,0 +1,16 @@
+-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+						Narmjep's Text To Code
+
+
+	How to use:   ttc.exe -f (filename / filepath)
+	
+	The program will parse text from a file into a C++ voidfunction and cout the result to your console where you can copy and paste it
+
+	Options:
+		
+		-f (filename / filepath) : Selects the textfile to parse into a C++ function.
+
+		-h : displays this help menu.
+
+
+-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
