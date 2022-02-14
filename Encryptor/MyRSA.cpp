@@ -110,10 +110,10 @@ bool Keys(size_t range, int * publicKey , int * privateKey) {
     return true;
 }
 
-//TODO Broken
+
 int pow_mod(int m, int e, int n) {
     int x = m;
-    for (int i = 0; i < e; i++) {
+    for (int i = 1; i < e; i++) {
         x = (x * m) % n;
     }
     return x;

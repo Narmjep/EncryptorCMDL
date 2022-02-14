@@ -59,17 +59,20 @@ int main(int argc, char** argv)
 
 
 
+
     int* priv = new int[2];
     int* pub = new int[2];
-    Keys(1000, pub, priv);
+    Keys(100, pub, priv);
     PAUSE;
-    /*
+    
     //Input File
     std::string filename = "help.txt";
-
     std::ifstream inputFile(filename);
-    */
-    std::string hi = "Hello";
+    std::stringstream stream;
+
+    stream << inputFile.rdbuf();
+
+    std::string hi = stream.str();
     size_t size = hi.size() + 1;
     int* buffer = new int[size];
 
