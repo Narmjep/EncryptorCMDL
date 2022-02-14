@@ -11,6 +11,9 @@ std::cin.get();
 
 #define N std::cout << std::endl;
 
+#define END std::cout << std::endl; \
+            return 0;
+
 void printHelpPage() {
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  RSA DEMO  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
@@ -50,6 +53,10 @@ void printHelpPage() {
     std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
 }
 
+inline bool exists(const std::string& name) {
+    std::ifstream f(name.c_str());
+    return f.good();
+}
 
 
 inline bool exists(const std::string& name) {
@@ -66,18 +73,35 @@ int main(int argc, char** argv)
     bool r_switch = 0;
 
     //Switches
-
-    // -h
     InputParser input(argc, argv);
+
+    //-i
+
+    if (input.optionExists("-i") == false) {
+        std::cout << "Please set a valid input file!!!";
+        END;
+    }
+
+    if (input.optionParamExists("-i") == false) {
+        std::cout << "Please set a valid input file!!!";
+        END;
+    }
+
+    
+
+
+
+    //h
+
     if (input.optionExists("-h") || input.optionExists("-H")){
         printHelpPage();
-        return 0;
+        END;
     }
 
     //-c
     
     //-d
-    //-i
+    
     //-k
     //-K
     //-o
@@ -93,7 +117,7 @@ int main(int argc, char** argv)
     PAUSE;
     
     //Input File
-    std::string filename = "help.txt";
+    std::string filename = "example.txt";
     std::ifstream inputFile(filename);
     std::stringstream stream;
 

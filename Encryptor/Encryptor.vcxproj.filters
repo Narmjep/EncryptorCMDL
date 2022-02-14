@@ -49,5 +49,8 @@
     <Text Include="help.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="example.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

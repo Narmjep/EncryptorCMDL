@@ -155,6 +155,7 @@
     <ClInclude Include="MyRSA.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="example.txt" />
     <Text Include="help.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
