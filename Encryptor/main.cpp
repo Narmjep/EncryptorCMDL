@@ -12,26 +12,45 @@ std::cin.get();
 #define N std::cout << std::endl;
 
 void printHelpPage() {
-    std::cout << "\n" << "\n";
-    std::cout << "##----------------------------------------------Welcome to Narmjeps RSA Encryptor----------------------------------------------##";
-    std::cout << "\n" << "\n";
-    std::cout << "	how to use: ./Encryptor.exe -f (inputfile name) -o (outputfile name) [options]";
-    std::cout << "\n";
-    std::cout << "	List of possible options:";
-    std::cout << "\n";
-    std::cout << "		-c (complexity) : Sets the largest prime that can be used to create the keys.";
-    std::cout << "\n";
-    std::cout << "		-h : Prints this help message.";
-    std::cout << "\n";
-    std::cout << "		-o (filename) : Sets the name of the outputfile that will be created. This will overwrite any file with the same name.";
-    std::cout << "\n";
-    std::cout << "		-r : Runs the program with the step by step explanation.";
-    std::cout << "\n";
-    std::cout << "		-f (filename) : Sets the input file to be encrypted. The file should be a text file.";
-    std::cout << "\n" << "\n";
-    std::cout << "##------------------------------------------------------------------------------------------------------------------------------##";
-    std::cout << "\n" << "\n";
+    std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
+    std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  RSA DEMO  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
+    std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
+    std::cout << "" << "\n";
+    std::cout << "How to use:" << "\n";
+    std::cout << "" << "\n";
+    std::cout << "~~Encryption~~" << "\n";
+    std::cout << "" << "\n";
+    std::cout << "rsa.exe -i (input file) [options]" << "\n";
+    std::cout << "" << "\n";
+    std::cout << "The program will read a text file, encrypt its content using RSA and then generate a new file with the name 'encrypted.txt'." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "Options:" << "\n";
+    std::cout << "         " << "\n";
+    std::cout << "         -c (x) : Set the largest prime number that can be used for the key generation." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -d : Set the program in decryption mode. When decrypting, use the -p switch." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -h : Displays this help menu;" << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -H : Displays this help menu;" << "\n";
+    std::cout << " " << "\n";
+    std::cout << "         -i (file) : Set the file that will be read and encrypted." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -k : Writes the private and public key to a file with the name 'keys.txt'. If a file with the same name already exists it can be overwritten using the switch -K." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -K : Writes the private and public key to a file with the name 'keys.txt'. If a file with the same name already exists it will be overwritten." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -o (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it can be overwritten using the switch -O." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -O (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it will be overwritten." << "\n";
+    std::cout << "         " << "\n";
+    std::cout << "" << "\n";
+    std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
+    std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
+    std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
 }
+
+
 
 inline bool exists(const std::string& name) {
     std::ifstream f(name.c_str());
@@ -42,19 +61,27 @@ inline bool exists(const std::string& name) {
 int main(int argc, char** argv)
 {
 
+    unsigned int complexity = 100;
+
     bool r_switch = 0;
 
     //Switches
+
+    // -h
     InputParser input(argc, argv);
-    if (input.optionExists("-h")) {
+    if (input.optionExists("-h") || input.optionExists("-H")){
         printHelpPage();
         return 0;
     }
 
+    //-c
     
-
-
-    r_switch = input.optionExists("-r");
+    //-d
+    //-i
+    //-k
+    //-K
+    //-o
+    //-O
 
 
 
@@ -62,7 +89,7 @@ int main(int argc, char** argv)
 
     int* priv = new int[2];
     int* pub = new int[2];
-    Keys(100, pub, priv);
+    Keys(complexity, pub, priv);
     PAUSE;
     
     //Input File

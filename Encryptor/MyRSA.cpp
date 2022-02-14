@@ -130,7 +130,7 @@ bool EncryptMessage(int* input , int* output, size_t size, int* pub) {
     for (int i = 0; i < size; i++) {
 
         m = input[i];
-        std::cout << "m: " << m << "\n";
+        //std::cout << "m: " << m << "\n";
         c = pow_mod(m, e, n);
         output[i] = c;
     }
