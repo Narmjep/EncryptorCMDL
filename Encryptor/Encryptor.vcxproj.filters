@@ -21,13 +21,13 @@
     <ClCompile Include="MyRSA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ipad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ppcm_pgcd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

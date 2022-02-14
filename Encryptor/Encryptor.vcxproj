@@ -123,6 +123,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\libs</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapFileName>MapFile</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,11 +144,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.cpp" />
     <ClCompile Include="InputParser.cpp" />
     <ClCompile Include="Ipad.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyRSA.cpp" />
+    <ClCompile Include="ppcm_pgcd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.h" />
