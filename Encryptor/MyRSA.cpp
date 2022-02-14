@@ -60,6 +60,7 @@ bool Keys(size_t range, int * publicKey , int * privateKey) {
     std::vector<int> kprimes;
     kprimes = decompose(k);
 
+    //TODO: e always same values, create e list and select random value
     for (int i = 2; i < k; i++) {
         eprimes = decompose(i);
         if (checkIfCommonInt(kprimes, eprimes) == false) {

@@ -59,10 +59,7 @@ inline bool exists(const std::string& name) {
 }
 
 
-inline bool exists(const std::string& name) {
-    std::ifstream f(name.c_str());
-    return f.good();
-}
+
 
 
 int main(int argc, char** argv)
@@ -87,6 +84,12 @@ int main(int argc, char** argv)
         END;
     }
 
+    std::string* filename = new std::string;
+    *filename = input.getOptionParam("-i");
+    if (exists(*filename) == false) {
+        std::cout << "The file '" << *filename << "' does not exist";
+        END;
+    }
     
 
 
@@ -117,37 +120,33 @@ int main(int argc, char** argv)
     PAUSE;
     
     //Input File
-    std::string filename = "example.txt";
-    std::ifstream inputFile(filename);
+
+    std::ifstream inputFile(*filename);
     std::stringstream stream;
 
     stream << inputFile.rdbuf();
 
     std::string hi = stream.str();
     size_t size = hi.size() + 1;
-    int* buffer = new int[size];
+    int* message_intptr = new int[size];
 
-    CharToInt(hi.c_str(), buffer, size);
+    CharToInt(hi.c_str(), message_intptr, size);
     
-    int* dig = new int[size];
-    EncryptMessage(buffer, dig, size, pub);
-    N;
-    for (int i = 0; i < size-1; i++) {
-        std::cout << dig[i] << " / ";
-    }
-    N;
+    int* encrypted_intptr = new int[size];
+    EncryptMessage(message_intptr, encrypted_intptr, size, pub);
+   
 
-    int* other_buffer = new int[size];
+    int* decrypted_intptr = new int[size];
 
-    DecryptMessage(dig, other_buffer, size, priv);
+    DecryptMessage(encrypted_intptr, decrypted_intptr, size, priv);
     
-    char* original = new char[size];
+    char* decrypted_charptr = new char[size];
 
-    IntToChar(other_buffer, original, size);
+    IntToChar(decrypted_intptr, decrypted_charptr, size);
 
     N;
     for (int i = 0; i < size; i++) {
-        std::cout << original[i];
+        std::cout << decrypted_charptr[i];
     }
     N;
     return 0;
