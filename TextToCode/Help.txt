@@ -1,6 +1,10 @@
 -#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 						Narmjep's Text To Code
+<<<<<<< HEAD
 Edited in VSC
+=======
+Edited in GITHUB
+>>>>>>>> ccbcf517305f0379c9b32d39aedbacd52fc6b334
 
 	How to use:   ttc.exe -f (filename / filepath)
 	
