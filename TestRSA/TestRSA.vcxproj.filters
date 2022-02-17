@@ -18,39 +18,19 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputParser.cpp">
+    <ClCompile Include="MyRSA2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ipad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ppcm_pgcd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyRSA.cpp">
+    <ClCompile Include="ppcm_pgcd2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyRSA.h">
+    <ClInclude Include="..\Encryptor\MyRSA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.h">
+    <ClInclude Include="..\Encryptor\ppcm_pgcd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ipad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="help.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="example.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

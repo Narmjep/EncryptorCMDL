@@ -11,7 +11,7 @@ std::vector<int> getMinPrimes(int N) {
     return returnlist;
 }
 
-bool Keys(size_t range, int * publicKey , int * privateKey) {
+bool Keys(size_t range, int* publicKey, int* privateKey) {
 
     int p;
     int q;
@@ -70,6 +70,7 @@ bool Keys(size_t range, int * publicKey , int * privateKey) {
             evalues.push_back(i);
         }
     }
+    spell(evalues, "possbiel e values");
     e = evalues[rand() % eprimes.size()];
 
 
@@ -124,13 +125,13 @@ int pow_mod(int m, int e, int n) {
     return x;
 }
 
-bool EncryptMessage(int* input , int* output, size_t size, int* pub) {
+bool EncryptMessage(int* input, int* output, size_t size, int* pub) {
 
     int c;
     int m;
     int n = pub[0];
     int e = pub[1];
-    
+
 
     for (int i = 0; i < size; i++) {
 
