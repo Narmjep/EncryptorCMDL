@@ -12,7 +12,7 @@ The program will read a text file, encrypt its content using RSA and then genera
 
 Options:
 		
-		-c (x) : Set the largest prime number that can be used for the key generation.
+		-c (x) : Set the largest prime number that can be used for the key generation. The default value is 100.
 
 		-d : Set the program in decryption mode. When decrypting, use the -p switch.
 
@@ -30,6 +30,7 @@ Options:
 
 		-O (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it will be overwritten.
 		
+		-p : 
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

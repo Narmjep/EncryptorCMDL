@@ -30,7 +30,7 @@ void printHelpPage() {
     std::cout << "" << "\n";
     std::cout << "Options:" << "\n";
     std::cout << "         " << "\n";
-    std::cout << "         -c (x) : Set the largest prime number that can be used for the key generation." << "\n";
+    std::cout << "         -c (x) : Set the largest prime number that can be used for the key generation. The default values is " << "\n";
     std::cout << "" << "\n";
     std::cout << "         -d : Set the program in decryption mode. When decrypting, use the -p switch." << "\n";
     std::cout << "" << "\n";
