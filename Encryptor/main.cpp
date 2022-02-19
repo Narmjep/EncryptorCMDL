@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ppcm_pgcd.h>
 #include <fstream>
+#include <time.h>
 
 #include "MyRSA.h"
 #include "InputParser.h"
@@ -64,6 +65,7 @@ inline bool exists(const std::string& name) {
 
 int main(int argc, char** argv)
 {
+    srand(time(NULL));
 
     unsigned int complexity = 100;
 

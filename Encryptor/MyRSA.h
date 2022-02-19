@@ -1,7 +1,6 @@
 #pragma once
 #include "ppcm_pgcd.h"
 #include <vector>
-#include <time.h>
 
 typedef long long int TYPE;
 

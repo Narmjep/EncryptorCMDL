@@ -1,5 +1,7 @@
 #include "MyRSA.h"
 
+#include "_Debug.h"
+
 
 std::vector<int> getMinPrimes(int N) {
     std::vector<int> returnlist = getprimes(N);
@@ -11,7 +13,7 @@ std::vector<int> getMinPrimes(int N) {
     return returnlist;
 }
 
-bool Keys(size_t range, int * publicKey , int * privateKey) {
+bool Keys(size_t range, int* publicKey, int* privateKey) {
 
     int p;
     int q;
@@ -30,8 +32,6 @@ bool Keys(size_t range, int * publicKey , int * privateKey) {
     std::vector<int> eval;
     int e = 0;
 
-
-    srand(time(NULL));
 
 
     //Get p and q
@@ -61,17 +61,22 @@ bool Keys(size_t range, int * publicKey , int * privateKey) {
     std::vector<int> evalues;
     kprimes = decompose(k);
 
-    //TODO: e always same values, create e list and select random value
-    for (int i = 2; i < k; i++) {
+
+    for (int i = 7; i < range; i++) {
         eprimes = decompose(i);
         if (checkIfCommonInt(kprimes, eprimes) == false) {
             //e = i;
             //break;
             evalues.push_back(i);
+            
         }
     }
-    e = evalues[rand() % eprimes.size()];
 
+    spell(evalues, "possible e values");
+
+    int random = rand() % evalues.size();
+
+    e = evalues[random];
 
 
 

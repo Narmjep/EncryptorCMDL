@@ -155,6 +155,7 @@
     <ClInclude Include="Ipad.h" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="MyRSA.h" />
+    <ClInclude Include="_Debug.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="example.txt" />
