@@ -1,7 +1,14 @@
 #include "MyRSA.h"
 
+#ifdef _DEBUG
+#define print(x) std::cout<<x<< std::endl
+#else
+#define print(x)
+#endif
+
 
 std::vector<int> getMinPrimes(int N) {
+    print("inside minprimes");
     std::vector<int> returnlist = getprimes(N);
     for (int i = 0; i <= 4; i++) {
         returnlist.erase(returnlist.begin());
@@ -36,11 +43,13 @@ bool Keys(size_t range, int* publicKey, int* privateKey) {
 
     //Get p and q
     std::vector<int> minPrimes = getMinPrimes(range);
+    print("minPrimes initilaized");
     x = rand() % minPrimes.size();
     p = minPrimes[x];
     q = p;
 
     while (q == p) {
+        print("loop p q");
         x = rand() % minPrimes.size();
         q = minPrimes[x];
     }
@@ -53,28 +62,33 @@ bool Keys(size_t range, int* publicKey, int* privateKey) {
     N = p * q;
     //Get k
     k = (p - 1) * (q - 1);
-
+    print(k);
+    print("Generating e");
 
     //Get e
     std::vector<int> eprimes;
     std::vector<int> kprimes;
     std::vector<int> evalues;
     kprimes = decompose(k);
+    print("kprimes initialized");
 
-    //TODO: e always same values, create e list and select random value
-    for (int i = 2; i < k; i++) {
+
+    for (int i = 7; i < range; i++) {
+        print("I:");
+        print(i);
         eprimes = decompose(i);
         if (checkIfCommonInt(kprimes, eprimes) == false) {
             //e = i;
             //break;
             evalues.push_back(i);
+            spell(evalues, "current e values");
         }
     }
-    spell(evalues, "possbiel e values");
+    spell(evalues, "possible e values");
     e = evalues[rand() % eprimes.size()];
 
 
-
+    print("E generated");
 
     //Get D
 

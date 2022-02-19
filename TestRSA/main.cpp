@@ -13,7 +13,9 @@ int test() {
 }
 
 int main() {
-	//spell(getprimes(100), "primes");
+
+	/*spell(getMinPrimes(100), " minprimes");
+	spell(getprimes(100), "\n primes");*/
 
 	test();
 	

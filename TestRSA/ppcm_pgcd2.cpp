@@ -2,8 +2,7 @@
 
 
 
-
-
+#define print(x) std::cout << x << "\n";
 
 
 
@@ -23,15 +22,16 @@ void spell(std::vector<int> vec, std::string name) {
 
 //Get Primes
 std::vector<int> getprimes(int range) {
-
+    std::cout << "Chosen range = " << range << "\n";
     //Calculating Prime numbers
     std::vector<int> primes;
     primes.push_back(2);
+    std::cout << primes.size();
     bool isPrime = false;
     for (int number = 3; number <= range ; number++) {
         isPrime = true;
 
-
+        
         for (int i = 0; i < primes.size(); i++) {
             if (number % primes[i] == 0) {
                 isPrime = false;
@@ -63,7 +63,7 @@ bool checkprime(int N) {
 //Decompose
 
 std::vector<int> decompose(int N) {
-
+    print("decompose begin");
     std::vector<int> comp;
 
     if (checkprime(N) == true) {
@@ -93,7 +93,7 @@ std::vector<int> decompose(int N) {
     //Resize vector
 
 
-
+    print("decompose end");
     return comp;
 }
 
