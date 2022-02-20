@@ -8,7 +8,7 @@ How to use:
 
 rsa.exe -i (input file) [options]
 
-The program will read a text file, encrypt its content using RSA and then generate a new file with the name "encrypted.txt".
+The program will read a text file, encrypt its content using RSA and then generate a new file with the name "encrypted.txt". Additionally two json files will be created containing the public and the private key.
 
 Options:
 		
@@ -22,15 +22,15 @@ Options:
 	
 		-i (file) : Set the file that will be read and encrypted.
 
-		-k : Writes the private and public key to a file with the name "keys.txt". If a file with the same name already exists it can be overwritten using the switch -K.
+		-k (private key file name);(public key file name) : Set the name of the private and public key file. If the files already exist they can be overwritten using the switch -K.
 
-		-K : Writes the private and public key to a file with the name "keys.txt". If a file with the same name already exists it will be overwritten.
+		-K (private key file name);(public key file name) : Set the name of the private and public key file. If the files already exist they will be overwritten.
 
 		-o (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it can be overwritten using the switch -O.
 
 		-O (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it will be overwritten.
 		
-		-p : 
+		-p (Keyfile) : Set the key used during encryption / decryption. If this option isn't used when encrypting, the program will automatically create generate a key pair.
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
