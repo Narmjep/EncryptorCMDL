@@ -6,14 +6,9 @@
 #include "MyRSA.h"
 #include "InputParser.h"
 #include "Ipad.h"
+#include "_Debug.h"
 
-#define PAUSE std::cout << std::endl; \
-std::cin.get();
 
-#define N std::cout << std::endl;
-
-#define END std::cout << std::endl; \
-            return 0;
 
 void printHelpPage() {
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
@@ -60,6 +55,7 @@ inline bool exists(const std::string& name) {
     return f.good();
 }
 
+std::string keyFolderPath = "./Keys";
 
 
 
@@ -105,17 +101,30 @@ int main(int argc, char** argv)
     }
 
     //-c
+
+    if (input.optionExists("-c") && input.optionParamExists("-c")) {
+        complexity = std::stoi(input.getOptionParam("-c"));
+    }
     
     //-d
+
+    bool decryptionMode = false;
+
+    if (input.optionExists("-d")) {
+        decryptionMode = true;
+    }
     
-    //-k
-    //-K
+    //-k & -K
+    
+
+
     //-o
     //-O
 
 
 
 
+    //Test Program
 
     int* priv = new int[2];
     int* pub = new int[2];

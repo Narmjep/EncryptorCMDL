@@ -151,6 +151,7 @@
     <ClCompile Include="ppcm_pgcd.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\JSONs\json.hpp" />
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.h" />
     <ClInclude Include="Ipad.h" />
     <ClInclude Include="InputParser.h" />
