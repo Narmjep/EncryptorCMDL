@@ -6,7 +6,7 @@
 #define PAUSE std::cout << std::endl; \
 std::cin.get();
 
-#define N std::cout << std::endl;
+#define NL std::cout << std::endl;
 
 #define END std::cout << std::endl; \
             return 0;

@@ -121,46 +121,83 @@ int main(int argc, char** argv)
     //-o
     //-O
 
-
-
-
-    //Test Program
-
+    //Get Keys
     int* priv = new int[2];
     int* pub = new int[2];
     Keys(complexity, pub, priv);
     PAUSE;
-    
-    //Input File
 
-    std::ifstream inputFile(*filename);
-    std::stringstream stream;
+    //Get Input file
+    std::fstream inputFile(*filename);
+    std::string str_Msg;
 
-    stream << inputFile.rdbuf();
+    if (inputFile.is_open() == false) {
+        print("Could not open the file!");
+        END;
+    }
+    inputFile >> str_Msg; //? wtf
+    print("Message to Encrypt:");
+    print(str_Msg);
+    inputFile.close();
 
-    std::string hi = stream.str();
-    size_t size = hi.size() + 1;
-    int* message_intptr = new int[size];
+    //Encrypt
+    const char* msg = str_Msg.c_str();
+    const int msgLen = str_Msg.length()+1;
+    int* int_msg = new int[msgLen];
+    CharToInt(msg, int_msg, msgLen);
+    int* int_encrypted = new int[msgLen];
+    EncryptMessage(int_msg,int_encrypted,msgLen,pub);
+    char* str_encrypted = new char[msgLen];
+    IntToChar(int_encrypted, str_encrypted, msgLen);
 
-    CharToInt(hi.c_str(), message_intptr, size);
-    
-    int* encrypted_intptr = new int[size];
-    EncryptMessage(message_intptr, encrypted_intptr, size, pub);
+    //Write to File
+    std::ofstream outputFile("./Encrypted/EncryptedMsg.txt");
+    outputFile << std::string(str_encrypted);
+
+    END;
+
+
+    //----------------------------------------------------------------------------------------------
+
+    ////Test Program
+
+    //INT* PRIV = NEW INT[2];
+    //INT* PUB = NEW INT[2];
+    //KEYS(COMPLEXITY, PUB, PRIV);
+    //PAUSE;
+    //
+    ////Input File
+
+    //std::ifstream inputFile(*filename);
+    //std::stringstream stream;
+
+    //stream << inputFile.rdbuf();
+
+    //std::string hi = stream.str();
+    //size_t size = hi.size() + 1;
+    //int* message_intptr = new int[size];
+
+    //CharToInt(hi.c_str(), message_intptr, size);
+    //
+    //int* encrypted_intptr = new int[size];
+    //EncryptMessage(message_intptr, encrypted_intptr, size, pub);
    
 
-    int* decrypted_intptr = new int[size];
+    //int* decrypted_intptr = new int[size];
 
-    DecryptMessage(encrypted_intptr, decrypted_intptr, size, priv);
-    
-    char* decrypted_charptr = new char[size];
+    //DecryptMessage(encrypted_intptr, decrypted_intptr, size, priv);
+    //
+    //char* decrypted_charptr = new char[size];
 
-    IntToChar(decrypted_intptr, decrypted_charptr, size);
+    //IntToChar(decrypted_intptr, decrypted_charptr, size);
 
-    N;
-    for (int i = 0; i < size; i++) {
-        std::cout << decrypted_charptr[i];
-    }
-    N;
+    //NL;
+    //for (int i = 0; i < size; i++) {
+    //    std::cout << decrypted_charptr[i];
+    //}
+    //NL;
+
+
     return 0;
 }
 
