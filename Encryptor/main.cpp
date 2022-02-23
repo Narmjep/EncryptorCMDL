@@ -129,20 +129,28 @@ int main(int argc, char** argv)
 
     //Get Input file
     std::fstream inputFile(*filename);
-    std::string str_Msg;
 
     if (inputFile.is_open() == false) {
         print("Could not open the file!");
         END;
     }
-    inputFile >> str_Msg; //? wtf
+    
+    std::stringstream strs_Msg;
+    strs_Msg << inputFile.rdbuf();
+    std::string str_msg = strs_Msg.str();
+
     print("Message to Encrypt:");
-    print(str_Msg);
+    print(strs_Msg.str() << "\n");
+    const char* msg = str_msg.c_str();
+    print("MSG: " << msg);
     inputFile.close();
 
     //Encrypt
-    const char* msg = str_Msg.c_str();
-    const int msgLen = str_Msg.length()+1;
+    
+    size_t msgLen = strs_Msg.str().length();
+    print("Length");
+    print(msgLen);
+    NL;
     int* int_msg = new int[msgLen];
     CharToInt(msg, int_msg, msgLen);
     int* int_encrypted = new int[msgLen];
@@ -151,22 +159,25 @@ int main(int argc, char** argv)
     IntToChar(int_encrypted, str_encrypted, msgLen);
 
     //Write to File
-    std::ofstream outputFile("./Encrypted/EncryptedMsg.txt");
+    std::ofstream outputFile("EncryptedMsg.txt"); //TODO save in folder
     outputFile << std::string(str_encrypted);
+    print("\n Encrypted:");
+    print(str_encrypted);
 
     END;
 
+    
 
     //----------------------------------------------------------------------------------------------
 
-    ////Test Program
+    //Test Program
 
     //INT* PRIV = NEW INT[2];
     //INT* PUB = NEW INT[2];
     //KEYS(COMPLEXITY, PUB, PRIV);
     //PAUSE;
     //
-    ////Input File
+    //Input File
 
     //std::ifstream inputFile(*filename);
     //std::stringstream stream;
