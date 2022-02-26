@@ -17,6 +17,7 @@ public:
 
     /// @author iain
     bool optionExists(const std::string& option) const;
+
 private:
     std::vector <std::string> tokens;
 };

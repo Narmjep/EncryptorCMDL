@@ -4,13 +4,10 @@
 
 How to use:
 
-~~Encryption~~
+~~Key generation~~
+First you will need a private and a public key. Those can be created using the -k switch.
 
-rsa.exe -i (input file) [options]
-
-The program will read a text file, encrypt its content using RSA and then generate a new file with the name "encrypted.txt". Additionally two json files will be created containing the public and the private key.
-
-Options:
+CMD: RSA [-priv] [-pub]
 		
 		-c (x) : Set the largest prime number that can be used for the key generation. The default value is 100.
 
@@ -20,17 +17,17 @@ Options:
 
 		-H : Displays this help menu;
 	
-		-i (file) : Set the file that will be read and encrypted.
+		-i (file) : Set the file that will be read and encrypted / decrypted.
 
-		-k (private key file name);(public key file name) : Set the name of the private and public key file. If the files already exist they can be overwritten using the switch -K.
-
-		-K (private key file name);(public key file name) : Set the name of the private and public key file. If the files already exist they will be overwritten.
+		-k (file) : Set the key used in encryption / decryption.
 
 		-o (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it can be overwritten using the switch -O.
 
 		-O (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it will be overwritten.
 		
-		-p (Keyfile) : Set the key used during encryption / decryption. If this option isn't used when encrypting, the program will automatically create generate a key pair.
+		-priv (file) : Sets the name of the private key file that will be created. The default is "Priv.key".
+
+		-pub (file) : Sets the name of the public key file that will be created. The default is "Pub.key".
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

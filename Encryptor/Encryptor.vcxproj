@@ -156,6 +156,7 @@
     <ClInclude Include="dependencies\char.h" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="MyRSA.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="_Debug.h" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,12 @@
     <Text Include="example.txt" />
     <Text Include="help.txt" />
     <Text Include="Keys.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Encryptor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\rapha\Downloads\RSAicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -145,9 +145,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\TextToCode\InputParser.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\TextToCode\Help.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TTC.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\rapha\Downloads\TTCicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -10,6 +10,8 @@
 
 #define fori(x) for(int i = 0 ; i < x ; i++)
 
+typedef char byte_t;
+
 void printHelpPage() {
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  RSA DEMO  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
@@ -71,16 +73,13 @@ bool Encrypt(const std::string& filename, int* pub) {
     CopyTextFileContent(filename, str_Msg);
     print("Message to Encrypt:");
     print(str_Msg << "\n");
-    const char* msg = str_Msg.c_str();
+    const char* chr_msg = str_Msg.c_str();
     inputFile.close();
 
     //Encrypt
     size_t msgLen = str_Msg.length() + 1;
-    print("Length");
-    print(msgLen);
-    NL;
     int* int_msg = new int[msgLen];
-    CharToInt(msg, int_msg, msgLen);
+    CharToInt(chr_msg, int_msg, msgLen);
     int* int_encrypted = new int[msgLen];
     RSA::EncryptMessage(int_msg, int_encrypted, msgLen, pub);
     
@@ -88,16 +87,11 @@ bool Encrypt(const std::string& filename, int* pub) {
 
     //Write to File
     std::ofstream outputFile("EncryptedMsg.txt" , std::ios::out | std::ios::binary); //TODO save in folder
-    //? outputFile << std::string(str_encrypted); //? Save as char !!!
     fori(msgLen) {
-        outputFile.write((char*)&int_encrypted[i], sizeof(int_encrypted[i]));
+        outputFile.write((char*)&int_encrypted[i], sizeof(int));
     }
-    print("\n Encrypted:");
-    print("STRLEN: " << strlen((char*)int_encrypted));
-    print(std::string((char*)&int_encrypted[0]));
-
-
-        return true;
+    
+    return true;
 }
 
 bool Decrypt(const std::string& filename, int* priv) {
@@ -110,28 +104,18 @@ bool Decrypt(const std::string& filename, int* priv) {
     }
 
     std::string str_encrypted;
-    std::vector<char> buffer = CopyBinFileContent(filename);
+    std::vector<byte_t> buffer = (std::vector<char>)CopyBinFileContent(filename);
     char* chr_encrypted = &buffer[0];
-    str_encrypted = std::string(chr_encrypted);
-    print("Message to decrypt:");
-    print(str_encrypted);
-    print((int)str_encrypted[0]);
-    inputFile.close();
+    inputFile.close();  
 
     //Decrypt
-
-    size_t msgLen = buffer.size();
-    print("Length");
-    print(msgLen);
-    NL;
+    size_t msgLen = buffer.size() / sizeof(int);
     int* int_decrypted = new int[msgLen];
     RSA::DecryptMessage((int*)chr_encrypted, int_decrypted, msgLen, priv);
     char* str_decrypted = new char[msgLen];
     IntToChar(int_decrypted, str_decrypted, msgLen);
 
-    //Write to File
-    std::ofstream outputFile("EncryptedMsg.txt"); //TODO save in folder
-    outputFile << std::string(str_decrypted);
+    
     print("\n decrypted:");
     print(str_decrypted);
 
@@ -140,21 +124,64 @@ bool Decrypt(const std::string& filename, int* priv) {
 
 
 
-
+enum Mode_t {encryption, decryption, keys};
 
 int main(int argc, char** argv)
 {
     srand(time(NULL));
 
-    unsigned int complexity = 100;
-
-    bool r_switch = 0;
+    Mode_t mode = keys;
+    
 
     //Switches
     InputParser input(argc, argv);
 
-    //-i
+    
+    if (input.optionExists("-e") && input.optionExists("-d")) {
+        std::cout << "Cannot use encryption mode and decryption mode at the same time!";
+        END;
+    }
 
+    //-c
+    unsigned int complexity = 100;
+    if (input.optionExists("-c") && input.optionParamExists("-c")) {
+        complexity = std::stoi(input.getOptionParam("-c"));
+    }
+    
+    //-d
+    //TODO Decryption Mode
+
+    if (input.optionExists("-d")) {
+        mode = decryption;
+    }
+
+    //-k
+    int key[2];
+    std::string keyfile;
+
+    if (mode != keys) {
+
+        if (input.optionExists("-k") == false) {
+            std::cout << "Please set a valid key file! (-k (file))!";
+            END;
+        }
+
+        if (input.optionParamExists("-k") == false) {
+            std::cout << "Please set a valid key file! (-k (file))!";
+            END;
+        }
+
+        keyfile = input.getOptionParam("-k");
+
+    }
+
+    //h
+    if (input.optionExists("-h") || input.optionExists("-H")) {
+        printHelpPage();
+        END;
+    }
+
+    //-i
     if (input.optionExists("-i") == false) {
         std::cout << "Please set a valid input file!!!";
         END;
@@ -165,59 +192,42 @@ int main(int argc, char** argv)
         END;
     }
 
-    std::string* filename = new std::string;
-    *filename = input.getOptionParam("-i");
-    if (exists(*filename) == false) {
-        std::cout << "The file '" << *filename << "' does not exist";
+    std::string filename = input.getOptionParam("-i");
+    if (exists(filename) == false) {
+        std::cout << "The file '" << filename << "' does not exist";
         END;
     }
 
-
-
-
-    //h
-
-    if (input.optionExists("-h") || input.optionExists("-H")) {
-        printHelpPage();
-        END;
+    //-e
+    if (input.optionExists("-e")) {
+        mode = encryption;
     }
 
-    //-c
-
-    if (input.optionExists("-c") && input.optionParamExists("-c")) {
-        complexity = std::stoi(input.getOptionParam("-c"));
+    //-priv
+    std::string privKeyName = "Priv.key";
+    if (input.optionExists("-priv") && input.optionParamExists("-priv")) {
+        privKeyName = input.getOptionParam("-priv");
     }
 
-    //-d
-
-    bool decryptionMode = false;
-
-    if (input.optionExists("-d")) {
-        decryptionMode = true;
+    //pub
+    std::string pubKeyName = "Pub.key";
+    if (input.optionExists("-pub") && input.optionParamExists("-pub")) {
+        privKeyName = input.getOptionParam("-pub");
     }
-
-    //-k & -K
-
 
 
     //-o
+    std::string outputFile = "EncryptedMsg.bin";
+
+    if (input.optionExists("-o") && input.optionParamExists("-o")) {
+        outputFile = input.getOptionParam("-o");
+    }
     //-O
 
-    //Get Keys
-    int* priv = new int[2];
-    int* pub = new int[2];
-    RSA::Keys(complexity, pub, priv);
-    PAUSE;
-    
-    //Testing
 
-    Encrypt("example.txt", pub);
-    PAUSE;
-    NL;
-    print("---------------------------------------------------------------");
-    NL;
-    NL;
-    Decrypt("EncryptedMsg.txt", priv);
+    //main
+
+
     END;
 }
     
