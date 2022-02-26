@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\dependencies\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\dependencies\include;$(SolutionDir)\dependencies</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,16 +144,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\Char\char.cpp" />
     <ClCompile Include="InputParser.cpp" />
-    <ClCompile Include="Ipad.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyRSA.cpp" />
     <ClCompile Include="ppcm_pgcd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\JSONs\json.hpp" />
+    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\Char\char.h" />
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.h" />
-    <ClInclude Include="Ipad.h" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="MyRSA.h" />
     <ClInclude Include="_Debug.h" />

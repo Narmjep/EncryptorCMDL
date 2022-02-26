@@ -1,3 +1,1 @@
-START--
-This is an example!
-END--
+A

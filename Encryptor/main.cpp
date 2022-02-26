@@ -1,14 +1,14 @@
 #include <iostream>
-#include <ppcm_pgcd.h>
+#include "ppcm_pgcd.h"
 #include <fstream>
 #include <time.h>
 
 #include "MyRSA.h"
 #include "InputParser.h"
-#include "Ipad.h"
+#include "Char.h"
 #include "_Debug.h"
 
-
+#define fori(x) for(int i = 0 ; i < x ; i++)
 
 void printHelpPage() {
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
@@ -57,6 +57,83 @@ inline bool exists(const std::string& name) {
 
 std::string keyFolderPath = "./Keys";
 
+bool Encrypt(const std::string& filename, int* pub) {
+
+    //Get Input file
+    std::fstream inputFile(filename);
+
+    if (inputFile.is_open() == false) {
+        print("Could not open the file!");
+        END;
+    }
+
+    std::string str_Msg;
+    CopyFileContent(filename, str_Msg);
+    print("Message to Encrypt:");
+    print(str_Msg << "\n");
+    const char* msg = str_Msg.c_str();
+    inputFile.close();
+
+    //Encrypt
+
+    size_t msgLen = str_Msg.length() + 1;
+    print("Length");
+    print(msgLen);
+    NL;
+    int* int_msg = new int[msgLen];
+    CharToInt(msg, int_msg, msgLen);
+    int* int_encrypted = new int[msgLen];
+    RSA::EncryptMessage(int_msg, int_encrypted, msgLen, pub);
+    char* str_encrypted = new char[msgLen];
+    print("Encrypted numbers:");
+    IntToChar(int_encrypted, str_encrypted, msgLen);
+    //Write to File
+    std::ofstream outputFile("EncryptedMsg.txt"); //TODO save in folder
+    outputFile << std::string(str_encrypted); //? Save as char
+    print("\n Encrypted:");
+    print(str_encrypted);
+
+    return true;
+}
+
+bool Decrypt(const std::string& filename, int* priv) {
+    //Get Input file
+    std::fstream inputFile(filename);
+
+    if (inputFile.is_open() == false) {
+        print("Could not open the file!");
+        END;
+    }
+
+    std::string str_encrypted;
+    CopyFileContent(filename, str_encrypted);
+    print("Message to decrypt:");
+    print(str_encrypted << "\n");
+    inputFile.close();
+
+    //Decrypt
+
+    size_t msgLen = str_encrypted.length() + 1;
+    print("Length");
+    print(msgLen);
+    NL;
+    int* int_encrypted = new int[msgLen];
+    CharToInt(str_encrypted.c_str(), int_encrypted, msgLen);
+    int* int_decrypted = new int[msgLen];
+    RSA::DecryptMessage(int_encrypted, int_decrypted, msgLen, priv);
+    char* str_decrypted = new char[msgLen];
+    IntToChar(int_decrypted, str_decrypted, msgLen);
+
+    //Write to File
+    std::ofstream outputFile("EncryptedMsg.txt"); //TODO save in folder
+    outputFile << std::string(str_decrypted);
+    print("\n decrypted:");
+    print(str_decrypted);
+
+    return true;
+}
+
+
 
 
 
@@ -89,13 +166,13 @@ int main(int argc, char** argv)
         std::cout << "The file '" << *filename << "' does not exist";
         END;
     }
-    
+
 
 
 
     //h
 
-    if (input.optionExists("-h") || input.optionExists("-H")){
+    if (input.optionExists("-h") || input.optionExists("-H")) {
         printHelpPage();
         END;
     }
@@ -105,7 +182,7 @@ int main(int argc, char** argv)
     if (input.optionExists("-c") && input.optionParamExists("-c")) {
         complexity = std::stoi(input.getOptionParam("-c"));
     }
-    
+
     //-d
 
     bool decryptionMode = false;
@@ -113,9 +190,9 @@ int main(int argc, char** argv)
     if (input.optionExists("-d")) {
         decryptionMode = true;
     }
-    
+
     //-k & -K
-    
+
 
 
     //-o
@@ -124,91 +201,19 @@ int main(int argc, char** argv)
     //Get Keys
     int* priv = new int[2];
     int* pub = new int[2];
-    Keys(complexity, pub, priv);
+    RSA::Keys(complexity, pub, priv);
     PAUSE;
-
-    //Get Input file
-    std::fstream inputFile(*filename);
-
-    if (inputFile.is_open() == false) {
-        print("Could not open the file!");
-        END;
-    }
     
-    std::stringstream strs_Msg;
-    strs_Msg << inputFile.rdbuf();
-    std::string str_msg = strs_Msg.str();
+    //Testing
 
-    print("Message to Encrypt:");
-    print(strs_Msg.str() << "\n");
-    const char* msg = str_msg.c_str();
-    print("MSG: " << msg);
-    inputFile.close();
-
-    //Encrypt
-    
-    size_t msgLen = strs_Msg.str().length();
-    print("Length");
-    print(msgLen);
+    Encrypt("example.txt", pub);
+    PAUSE;
     NL;
-    int* int_msg = new int[msgLen];
-    CharToInt(msg, int_msg, msgLen);
-    int* int_encrypted = new int[msgLen];
-    EncryptMessage(int_msg,int_encrypted,msgLen,pub);
-    char* str_encrypted = new char[msgLen];
-    IntToChar(int_encrypted, str_encrypted, msgLen);
-
-    //Write to File
-    std::ofstream outputFile("EncryptedMsg.txt"); //TODO save in folder
-    outputFile << std::string(str_encrypted);
-    print("\n Encrypted:");
-    print(str_encrypted);
-
+    print("---------------------------------------------------------------");
+    NL;
+    NL;
+    Decrypt("EncryptedMsg.txt", priv);
     END;
-
-    
-
-    //----------------------------------------------------------------------------------------------
-
-    //Test Program
-
-    //INT* PRIV = NEW INT[2];
-    //INT* PUB = NEW INT[2];
-    //KEYS(COMPLEXITY, PUB, PRIV);
-    //PAUSE;
-    //
-    //Input File
-
-    //std::ifstream inputFile(*filename);
-    //std::stringstream stream;
-
-    //stream << inputFile.rdbuf();
-
-    //std::string hi = stream.str();
-    //size_t size = hi.size() + 1;
-    //int* message_intptr = new int[size];
-
-    //CharToInt(hi.c_str(), message_intptr, size);
-    //
-    //int* encrypted_intptr = new int[size];
-    //EncryptMessage(message_intptr, encrypted_intptr, size, pub);
-   
-
-    //int* decrypted_intptr = new int[size];
-
-    //DecryptMessage(encrypted_intptr, decrypted_intptr, size, priv);
-    //
-    //char* decrypted_charptr = new char[size];
-
-    //IntToChar(decrypted_intptr, decrypted_charptr, size);
-
-    //NL;
-    //for (int i = 0; i < size; i++) {
-    //    std::cout << decrypted_charptr[i];
-    //}
-    //NL;
-
-
-    return 0;
 }
+    
 

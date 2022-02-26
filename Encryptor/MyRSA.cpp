@@ -3,7 +3,10 @@
 #include "_Debug.h"
 
 
-std::vector<int> getMinPrimes(int N) {
+
+
+
+std::vector<int> RSA::getMinPrimes(int N) {
     std::vector<int> returnlist = getprimes(N);
     for (int i = 0; i <= 4; i++) {
         returnlist.erase(returnlist.begin());
@@ -13,7 +16,7 @@ std::vector<int> getMinPrimes(int N) {
     return returnlist;
 }
 
-bool Keys(size_t range, int* publicKey, int* privateKey) {
+bool RSA::Keys(size_t range, int* publicKey, int* privateKey) {
 
     int p;
     int q;
@@ -121,7 +124,7 @@ bool Keys(size_t range, int* publicKey, int* privateKey) {
 }
 
 
-int pow_mod(int m, int e, int n) {
+int RSA::pow_mod(int m, int e, int n) {
     int x = m;
     for (int i = 1; i < e; i++) {
         x = (x * m) % n;
@@ -129,39 +132,47 @@ int pow_mod(int m, int e, int n) {
     return x;
 }
 
-bool EncryptMessage(int* input , int* output, size_t size, int* pub) {
+bool RSA::EncryptMessage(int* input , int* output, size_t size, int* pub) {
 
     int c;
     int m;
     int n = pub[0];
     int e = pub[1];
     
-
+    print("Begin encryption:");
+    NL;
     for (int i = 0; i < size; i++) {
 
         m = input[i];
         //std::cout << "m: " << m << "\n";
         c = pow_mod(m, e, n);
         output[i] = c;
+        print(m << " >> " << c);
     }
+    print("End encryption");
 
     return true;
 }
 
-bool DecryptMessage(int* input, int* output, size_t size, int* priv) {
+bool RSA::DecryptMessage(int* input, int* output, size_t size, int* priv) {
 
     int c;
     int m;
     int n = priv[0];
+    print("n: " << n);
     int d = priv[1];
+    print("d: " << d);
 
+    print("Begin decryption:");
+    NL;
     for (int i = 0; i < size; i++) {
 
         c = input[i];
-        std::cout << "c: " << c << "\n";
         m = pow_mod(c, d, n);
         output[i] = m;
+        print(m << " >> " << c);
     }
+    print("End decryption");
 
     return true;
 }

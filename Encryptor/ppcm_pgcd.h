@@ -4,11 +4,13 @@
 #include <algorithm>
 #include <cmath>
 
+//Project
+
 //Functions:
 
 //Print vector
 
-void spell(std::vector<int> vec, std::string name);
+void spell(std::vector<int> vec, const std::string& name);
 
 
 //Get Primes

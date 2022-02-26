@@ -1,4 +1,15 @@
-#include "Ipad.h"
+#include "char.h"
+
+bool CopyFileContent(const std::string& path, std::string& output){
+	std::ifstream file(path, std::ios::binary);
+    std::string fileStr;
+    std::istreambuf_iterator<char> inputIt(file), emptyInputIt;
+    std::back_insert_iterator<std::string> stringInsert(fileStr);
+    copy(inputIt, emptyInputIt, stringInsert);
+
+    output = fileStr;
+    return true;
+}
 
 bool CharToInt(const char* input, int* output, size_t size) {
 

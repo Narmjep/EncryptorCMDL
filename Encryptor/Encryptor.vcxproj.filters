@@ -21,13 +21,13 @@
     <ClCompile Include="InputParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ipad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ppcm_pgcd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyRSA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\Char\char.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +41,13 @@
     <ClInclude Include="InputParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ipad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="_Debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\JSONs\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\Char\char.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

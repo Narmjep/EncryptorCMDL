@@ -12,7 +12,7 @@
 
 //Print vector
 
-void spell (std::vector<int> vec, std::string name){
+void spell (std::vector<int> vec, const std::string& name){
     std::cout<<name<<": ";
     for (int i=0;i<vec.size();i++){
         std::cout<<vec[i]<<";";
