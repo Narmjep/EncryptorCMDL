@@ -27,7 +27,7 @@
     <ClCompile Include="MyRSA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\Char\char.cpp">
+    <ClCompile Include="dependencies\char.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\JSONs\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\Char\char.h">
+    <ClInclude Include="dependencies\char.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

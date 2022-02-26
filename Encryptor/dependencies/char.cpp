@@ -1,6 +1,6 @@
 #include "char.h"
 
-bool CopyFileContent(const std::string& path, std::string& output){
+bool CopyTextFileContent(const std::string& path, std::string& output){
 	std::ifstream file(path, std::ios::binary);
     std::string fileStr;
     std::istreambuf_iterator<char> inputIt(file), emptyInputIt;
@@ -10,6 +10,16 @@ bool CopyFileContent(const std::string& path, std::string& output){
     output = fileStr;
     return true;
 }
+
+std::vector<char> CopyBinFileContent(const std::string& path) {
+    std::ifstream input(path, std::ios::binary);
+    std::vector<char> buffer(std::istreambuf_iterator<char>(input), {});
+    
+   
+    return buffer;
+}
+
+
 
 bool CharToInt(const char* input, int* output, size_t size) {
 
@@ -24,6 +34,8 @@ bool CharToInt(const char* input, int* output, size_t size) {
     //}
     return true;
 }
+
+
 
 bool IntToChar(int* input, char* output, size_t size) {
 

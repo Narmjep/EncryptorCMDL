@@ -12,5 +12,10 @@ std::cin.get();
             return 0;
 #else
 #define print(x);
+#define PAUSE;
+
+#define NL;
+
+#define END;
 #endif // _DEBUG
 

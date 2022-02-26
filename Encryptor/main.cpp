@@ -68,14 +68,13 @@ bool Encrypt(const std::string& filename, int* pub) {
     }
 
     std::string str_Msg;
-    CopyFileContent(filename, str_Msg);
+    CopyTextFileContent(filename, str_Msg);
     print("Message to Encrypt:");
     print(str_Msg << "\n");
     const char* msg = str_Msg.c_str();
     inputFile.close();
 
     //Encrypt
-
     size_t msgLen = str_Msg.length() + 1;
     print("Length");
     print(msgLen);
@@ -84,21 +83,26 @@ bool Encrypt(const std::string& filename, int* pub) {
     CharToInt(msg, int_msg, msgLen);
     int* int_encrypted = new int[msgLen];
     RSA::EncryptMessage(int_msg, int_encrypted, msgLen, pub);
-    char* str_encrypted = new char[msgLen];
-    print("Encrypted numbers:");
-    IntToChar(int_encrypted, str_encrypted, msgLen);
-    //Write to File
-    std::ofstream outputFile("EncryptedMsg.txt"); //TODO save in folder
-    outputFile << std::string(str_encrypted); //? Save as char
-    print("\n Encrypted:");
-    print(str_encrypted);
+    
 
-    return true;
+
+    //Write to File
+    std::ofstream outputFile("EncryptedMsg.txt" , std::ios::out | std::ios::binary); //TODO save in folder
+    //? outputFile << std::string(str_encrypted); //? Save as char !!!
+    fori(msgLen) {
+        outputFile.write((char*)&int_encrypted[i], sizeof(int_encrypted[i]));
+    }
+    print("\n Encrypted:");
+    print("STRLEN: " << strlen((char*)int_encrypted));
+    print(std::string((char*)&int_encrypted[0]));
+
+
+        return true;
 }
 
 bool Decrypt(const std::string& filename, int* priv) {
     //Get Input file
-    std::fstream inputFile(filename);
+    std::fstream inputFile(filename, std::ios::in | std::ios::binary);
 
     if (inputFile.is_open() == false) {
         print("Could not open the file!");
@@ -106,21 +110,22 @@ bool Decrypt(const std::string& filename, int* priv) {
     }
 
     std::string str_encrypted;
-    CopyFileContent(filename, str_encrypted);
+    std::vector<char> buffer = CopyBinFileContent(filename);
+    char* chr_encrypted = &buffer[0];
+    str_encrypted = std::string(chr_encrypted);
     print("Message to decrypt:");
-    print(str_encrypted << "\n");
+    print(str_encrypted);
+    print((int)str_encrypted[0]);
     inputFile.close();
 
     //Decrypt
 
-    size_t msgLen = str_encrypted.length() + 1;
+    size_t msgLen = buffer.size();
     print("Length");
     print(msgLen);
     NL;
-    int* int_encrypted = new int[msgLen];
-    CharToInt(str_encrypted.c_str(), int_encrypted, msgLen);
     int* int_decrypted = new int[msgLen];
-    RSA::DecryptMessage(int_encrypted, int_decrypted, msgLen, priv);
+    RSA::DecryptMessage((int*)chr_encrypted, int_decrypted, msgLen, priv);
     char* str_decrypted = new char[msgLen];
     IntToChar(int_decrypted, str_decrypted, msgLen);
 

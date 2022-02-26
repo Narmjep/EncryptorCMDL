@@ -110,6 +110,7 @@ bool RSA::Keys(size_t range, int* publicKey, int* privateKey) {
 
 #ifdef _DEBUG
     std::cout << "Public Key: " << std::to_string(pub[0]) + "," + std::to_string(pub[1]);
+    NL;
     std::cout << "Private Key: " << std::to_string(priv[0]) + "," + std::to_string(priv[1]);
 #endif
 
@@ -170,7 +171,7 @@ bool RSA::DecryptMessage(int* input, int* output, size_t size, int* priv) {
         c = input[i];
         m = pow_mod(c, d, n);
         output[i] = m;
-        print(m << " >> " << c);
+        print(c << " >> " << m);
     }
     print("End decryption");
 

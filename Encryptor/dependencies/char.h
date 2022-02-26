@@ -2,8 +2,12 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <cstddef>
+#include <vector>
 
-bool CopyFileContent(const std::string& path, std::string& output);
+bool CopyTextFileContent(const std::string& path, std::string& output);
+
+std::vector<char> CopyBinFileContent(const std::string& path);
 
 bool CharToInt(const char* input, int* output, size_t size);
 
