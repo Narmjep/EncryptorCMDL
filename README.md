@@ -1,6 +1,6 @@
 # Encryptor
 
-A simple commandline tool that encrypts a textfile using RSA encryption.
+A simple commandline tool that encrypts a file using RSA encryption.
 
 
 # TextToCode
