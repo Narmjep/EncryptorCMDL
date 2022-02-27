@@ -144,7 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dependencies\char.cpp" />
+    <ClCompile Include="char.cpp" />
     <ClCompile Include="InputParser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyRSA.cpp" />
@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.h" />
-    <ClInclude Include="dependencies\char.h" />
+    <ClInclude Include="char.h" />
     <ClInclude Include="dependencies\json.hpp" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="MyRSA.h" />

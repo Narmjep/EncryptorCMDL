@@ -112,7 +112,7 @@ bool Decrypt(const std::string& filename, RSA::Key priv, std::string outputFile 
     IntToChar(int_decrypted, str_decrypted, msgLen);
 
     
-    print("\n----------------------------------------------\nDecrypted Message:");
+    print("\n----------------------------------------------\nDecrypted Message:\n");
     print(str_decrypted);
 
     if (outputFile != "") {
