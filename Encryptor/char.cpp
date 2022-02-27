@@ -14,8 +14,6 @@ bool CopyTextFileContent(const std::string& path, std::string& output){
 std::vector<char> CopyBinFileContent(const std::string& path) {
     std::ifstream input(path, std::ios::binary);
     std::vector<char> buffer(std::istreambuf_iterator<char>(input), {}); // contains more than content
-    std::cout << "File Size: " << input.tellg();
-    std::cout << "Vector Size: " << buffer.size();
    
     return buffer;
 }

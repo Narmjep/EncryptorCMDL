@@ -1,6 +1,5 @@
 #include "MyRSA.h"
 
-#include "_Debug.h"
 
 
 
@@ -16,7 +15,17 @@ std::vector<int> RSA::getMinPrimes(int N) {
     return returnlist;
 }
 
-bool RSA::Keys(size_t range, int* publicKey, int* privateKey) {
+RSA::Key::Key(std::string path) {
+    std::ifstream keyfile(path);
+    json data;
+    keyfile >> data;
+
+    this->type = data.value("Type", "Error");
+    this->N = data.value("N", 0);
+    this->X = data.value("X", 0);
+}
+
+bool RSA::CreateKeys(size_t range, int* publicKey, int* privateKey) {
 
     int p;
     int q;
@@ -75,8 +84,6 @@ bool RSA::Keys(size_t range, int* publicKey, int* privateKey) {
         }
     }
 
-    spell(evalues, "possible e values");
-
     int random = rand() % evalues.size();
 
     e = evalues[random];
@@ -108,11 +115,6 @@ bool RSA::Keys(size_t range, int* publicKey, int* privateKey) {
 
     std::string keys = std::to_string(pub[0]) + "," + std::to_string(pub[1]) + "," + std::to_string(priv[0]) + "," + std::to_string(priv[1]);
 
-#ifdef _DEBUG
-    std::cout << "Public Key: " << std::to_string(pub[0]) + "," + std::to_string(pub[1]);
-    NL;
-    std::cout << "Private Key: " << std::to_string(priv[0]) + "," + std::to_string(priv[1]);
-#endif
 
     privateKey[0] = priv[0];
     privateKey[1] = priv[1];
@@ -140,17 +142,62 @@ bool RSA::EncryptMessage(int* input , int* output, size_t size, int* pub) {
     int n = pub[0];
     int e = pub[1];
     
-    print("Begin encryption:");
-    NL;
+    print_db("Begin encryption:");
+    NL_db;
     for (int i = 0; i < size; i++) {
 
         m = input[i];
         //std::cout << "m: " << m << "\n";
         c = pow_mod(m, e, n);
         output[i] = c;
-        print(m << " >> " << c);
+        print_db(m << " >> " << c);
     }
-    print("End encryption");
+    print_db("End encryption");
+
+    return true;
+}
+
+bool RSA::EncryptMessage(int* input, int* output, size_t size, RSA::Key key) {
+
+    int c;
+    int m;
+    int n = key.N;
+    int e = key.X;
+
+    print_db("Begin encryption:");
+    NL_db;
+    for (int i = 0; i < size; i++) {
+
+        m = input[i];
+        //std::cout << "m: " << m << "\n";
+        c = pow_mod(m, e, n);
+        output[i] = c;
+        print_db(m << " >> " << c);
+    }
+    print_db("\nEnd encryption");
+
+    return true;
+}
+
+bool RSA::DecryptMessage(int* input, int* output, size_t size, RSA::Key key) {
+
+    int c;
+    int m;
+    int n = key.N;
+    print_db("n: " << n);
+    int d = key.X;
+    print_db("d: " << d);
+
+    print_db("Begin decryption:");
+    NL_db;
+    for (int i = 0; i < size; i++) {
+
+        c = input[i];
+        m = pow_mod(c, d, n);
+        output[i] = m;
+        print_db(c << " >> " << m);
+    }
+    print_db("\nEnd decryption");
 
     return true;
 }
@@ -160,20 +207,41 @@ bool RSA::DecryptMessage(int* input, int* output, size_t size, int* priv) {
     int c;
     int m;
     int n = priv[0];
-    print("n: " << n);
+    print_db("n: " << n);
     int d = priv[1];
-    print("d: " << d);
+    print_db("d: " << d);
 
-    print("Begin decryption:");
-    NL;
+    print_db("Begin decryption:");
+    NL_db;
     for (int i = 0; i < size; i++) {
 
         c = input[i];
         m = pow_mod(c, d, n);
         output[i] = m;
-        print(c << " >> " << m);
+        print_db(c << " >> " << m);
     }
-    print("End decryption");
+    print_db("End decryption");
 
     return true;
 }
+
+//Json
+
+bool RSA::WriteKeyFile(std::string path, std::string type, int N, int x) {
+    std::ofstream keyfile(path);
+    json Key =
+    {
+        {"Type",type},
+        {"N",N},
+        {"X",x}
+    };
+
+    keyfile << std::setw(4) << Key;
+
+    return true;
+}
+
+
+
+
+

@@ -5,7 +5,8 @@
 #include <algorithm>
 #include "InputParser.h"
 
-#define END std::cin.get(); \
+#define END std::cout << "\nPress enter to exit..."; \
+std::cin.get(); \
 return 0;
 
 const std::string functionDeclBegin = "void ";

@@ -151,13 +151,13 @@
     <ClCompile Include="ppcm_pgcd.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\JSONs\json.hpp" />
     <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\Libs\PPCM_PGCD\ppcm_pgcd.h" />
     <ClInclude Include="dependencies\char.h" />
+    <ClInclude Include="dependencies\json.hpp" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="MyRSA.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="_Debug.h" />
+    <ClInclude Include="Defines.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="EncryptedMsg.txt" />

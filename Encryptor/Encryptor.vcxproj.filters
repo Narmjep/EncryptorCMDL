@@ -41,16 +41,16 @@
     <ClInclude Include="InputParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_Debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\rapha\OneDrive\Desktop\Onedrive\Dokumente\Programming\JSONs\json.hpp">
+    <ClInclude Include="Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\char.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

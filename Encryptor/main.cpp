@@ -6,7 +6,7 @@
 #include "MyRSA.h"
 #include "InputParser.h"
 #include "Char.h"
-#include "_Debug.h"
+#include "Defines.h"
 
 #define fori(x) for(int i = 0 ; i < x ; i++)
 
@@ -19,13 +19,9 @@ void printHelpPage() {
     std::cout << "" << "\n";
     std::cout << "How to use:" << "\n";
     std::cout << "" << "\n";
-    std::cout << "~~Encryption~~" << "\n";
-    std::cout << "" << "\n";
-    std::cout << "rsa.exe -i (input file) [options]" << "\n";
-    std::cout << "" << "\n";
-    std::cout << "The program will read a text file, encrypt its content using RSA and then generate a new file with the name 'encrypted.txt'. Additionally two json files will be created containing the public and the private key." << "\n";
-    std::cout << "" << "\n";
-    std::cout << "Options:" << "\n";
+    std::cout << "~~Key generation~~" << "\n";
+    std::cout << "First you will need a private and a public key. Those can be created using the -k switch." << "\n";         std::cout << "" << "\n";
+    std::cout << "CMD: RSA [-priv] [-pub]" << "\n";
     std::cout << "         " << "\n";
     std::cout << "         -c (x) : Set the largest prime number that can be used for the key generation. The default value is 100." << "\n";
     std::cout << "" << "\n";
@@ -35,17 +31,17 @@ void printHelpPage() {
     std::cout << "" << "\n";
     std::cout << "         -H : Displays this help menu;" << "\n";
     std::cout << " " << "\n";
-    std::cout << "         -i (file) : Set the file that will be read and encrypted." << "\n";
+    std::cout << "         -i (file) : Set the file that will be read and encrypted / decrypted." << "\n";
     std::cout << "" << "\n";
-    std::cout << "         -k (private key file name);(public key file name) : Set the name of the private and public key file. If the files already exist they can be overwritten using the switch -K." << "\n";
-    std::cout << "" << "\n";
-    std::cout << "         -K (private key file name);(public key file name) : Set the name of the private and public key file. If the files already exist they will be overwritten." << "\n";
+    std::cout << "         -k (file) : Set the key used in encryption / decryption." << "\n";
     std::cout << "" << "\n";
     std::cout << "         -o (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it can be overwritten using the switch -O." << "\n";
     std::cout << "" << "\n";
     std::cout << "         -O (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it will be overwritten." << "\n";
     std::cout << "         " << "\n";
-    std::cout << "         -p (Keyfile) : Set the key used during encryption / decryption. If this option isn't used when encrypting, the program will automatically create generate a key pair." << "\n";
+    std::cout << "         -priv (file) : Sets the name of the private key file that will be created. The default is 'Priv.key'." << "\n";
+    std::cout << "" << "\n";
+    std::cout << "         -pub (file) : Sets the name of the public key file that will be created. The default is 'Pub.key'." << "\n";
     std::cout << "" << "\n";
     std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
     std::cout << "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
@@ -59,12 +55,12 @@ inline bool exists(const std::string& name) {
 
 std::string keyFolderPath = "./Keys";
 
-bool Encrypt(const std::string& filename, int* pub) {
+bool Encrypt(const std::string& filename, std::string outputFile , RSA::Key key) {
 
     //Get Input file
     std::fstream inputFile(filename);
 
-    if (inputFile.is_open() == false) {
+    if (inputFile.is_open() == false || exists(filename) == false) {
         print("Could not open the file!");
         END;
     }
@@ -81,20 +77,20 @@ bool Encrypt(const std::string& filename, int* pub) {
     int* int_msg = new int[msgLen];
     CharToInt(chr_msg, int_msg, msgLen);
     int* int_encrypted = new int[msgLen];
-    RSA::EncryptMessage(int_msg, int_encrypted, msgLen, pub);
+    RSA::EncryptMessage(int_msg, int_encrypted, msgLen, key);
     
 
 
     //Write to File
-    std::ofstream outputFile("EncryptedMsg.txt" , std::ios::out | std::ios::binary); //TODO save in folder
+    std::ofstream file(outputFile , std::ios::out | std::ios::binary);
     fori(msgLen) {
-        outputFile.write((char*)&int_encrypted[i], sizeof(int));
+        file.write((char*)&int_encrypted[i], sizeof(int));
     }
     
     return true;
 }
 
-bool Decrypt(const std::string& filename, int* priv) {
+bool Decrypt(const std::string& filename, RSA::Key priv, std::string outputFile = "") {
     //Get Input file
     std::fstream inputFile(filename, std::ios::in | std::ios::binary);
 
@@ -116,43 +112,56 @@ bool Decrypt(const std::string& filename, int* priv) {
     IntToChar(int_decrypted, str_decrypted, msgLen);
 
     
-    print("\n decrypted:");
+    print("\n----------------------------------------------\nDecrypted Message:");
     print(str_decrypted);
+
+    if (outputFile != "") {
+        std::ofstream file(outputFile);
+        file << std::string(str_decrypted);
+        file.close();
+    }
 
     return true;
 }
 
 
 
-enum Mode_t {encryption, decryption, keys};
 
 int main(int argc, char** argv)
 {
     srand(time(NULL));
 
+    enum Mode_t { encryption, decryption, keys };
     Mode_t mode = keys;
     
 
     //Switches
     InputParser input(argc, argv);
 
+    //! Check mode
     
+    //-d
+    //TODO Decryption Mode
+    if (input.optionExists("-d")) {
+        mode = decryption;
+    }
+
+    //-e
+    if (input.optionExists("-e")) {
+        mode = encryption;
+    }
+ 
     if (input.optionExists("-e") && input.optionExists("-d")) {
         std::cout << "Cannot use encryption mode and decryption mode at the same time!";
         END;
     }
 
+    //! Options
+
     //-c
     unsigned int complexity = 100;
     if (input.optionExists("-c") && input.optionParamExists("-c")) {
         complexity = std::stoi(input.getOptionParam("-c"));
-    }
-    
-    //-d
-    //TODO Decryption Mode
-
-    if (input.optionExists("-d")) {
-        mode = decryption;
     }
 
     //-k
@@ -175,42 +184,40 @@ int main(int argc, char** argv)
 
     }
 
-    //h
+    //-h
     if (input.optionExists("-h") || input.optionExists("-H")) {
         printHelpPage();
         END;
     }
 
     //-i
-    if (input.optionExists("-i") == false) {
-        std::cout << "Please set a valid input file!!!";
-        END;
-    }
+    std::string inputFile;
+    if (mode != keys) {
+        if (input.optionExists("-i") == false) {
+            std::cout << "Please set a valid input file (-i [file])!!!";
+            END;
+        }
 
-    if (input.optionParamExists("-i") == false) {
-        std::cout << "Please set a valid input file!!!";
-        END;
-    }
+        if (input.optionParamExists("-i") == false) {
+            std::cout << "Please set a valid input file!!!";
+            END;
+        }
 
-    std::string filename = input.getOptionParam("-i");
-    if (exists(filename) == false) {
-        std::cout << "The file '" << filename << "' does not exist";
-        END;
-    }
-
-    //-e
-    if (input.optionExists("-e")) {
-        mode = encryption;
+        inputFile = input.getOptionParam("-i");
+        if (exists(inputFile) == false) {
+            std::cout << "The file '" << inputFile << "' does not exist";
+            END;
+        }
     }
 
     //-priv
-    std::string privKeyName = "Priv.key";
+    std::string privKeyName = "./Keys/Priv.key";
     if (input.optionExists("-priv") && input.optionParamExists("-priv")) {
         privKeyName = input.getOptionParam("-priv");
     }
 
     //pub
-    std::string pubKeyName = "Pub.key";
+    std::string pubKeyName = "./Keys/Pub.key";
     if (input.optionExists("-pub") && input.optionParamExists("-pub")) {
         privKeyName = input.getOptionParam("-pub");
     }
@@ -218,15 +225,53 @@ int main(int argc, char** argv)
 
     //-o
     std::string outputFile = "EncryptedMsg.bin";
+    bool overwrite = false;
 
     if (input.optionExists("-o") && input.optionParamExists("-o")) {
         outputFile = input.getOptionParam("-o");
     }
     //-O
+    if (input.optionExists("-O") && input.optionParamExists("-O")) {
+        outputFile = input.getOptionParam("-O");
+        overwrite = true;
+    }
 
 
     //main
 
+    switch (mode) {
+    case keys:
+        //Keys mode
+        std::cout << "Creating keys...\n";
+        int priv[2];
+        int pub[2];
+        RSA::CreateKeys(complexity, pub, priv);
+        std::cout << "Public Key: N = " << pub[0] << " | E = " << pub[1];
+        std::cout << "\nPrivate Key: N = " << priv[0] << " | D = " << priv[1];
+        RSA::WriteKeyFile(pubKeyName, "public", pub[0], pub[1]);
+        RSA::WriteKeyFile(privKeyName, "private", priv[0], priv[1]);
+        END;
+        break;
+    case encryption:
+        {
+            //encryption mode
+            RSA::Key publicKey(pubKeyName);
+            Encrypt(inputFile, outputFile, publicKey);
+            END;
+            break;
+        }
+    case decryption:
+        {
+            //decryption mode
+            if (input.optionParamExists("-o") == false) {
+                outputFile = "";
+            }
+            RSA::Key privateKey(privKeyName);
+            Decrypt(inputFile, privateKey, outputFile);
+            END;
+            break;
+        }
+    };
 
     END;
 }
