@@ -1,5 +1,7 @@
 #pragma once
 
+#define _DEBUG
+
 #ifdef _DEBUG
 #define print_db(x) std::cout << x << "\n";
 

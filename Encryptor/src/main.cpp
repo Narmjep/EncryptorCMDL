@@ -8,6 +8,7 @@
 #include "Char.h"
 #include "Defines.h"
 
+
 #define fori(x) for(int i = 0 ; i < x ; i++)
 
 typedef char byte_t;
