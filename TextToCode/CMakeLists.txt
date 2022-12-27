@@ -5,8 +5,9 @@ project(TTC)
 
 cmake_minimum_required(VERSION 3.10)
 
+file(GLOB sources src/*.cpp)
 
 # add the executable
-add_executable(TTC InputParser.cpp TextToCode.cpp ../rc/TTC.rc)
+add_executable(TTC ${sources} rc/TTC.rc)
 
 
