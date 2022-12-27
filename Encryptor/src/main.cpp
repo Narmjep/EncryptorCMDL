@@ -8,12 +8,11 @@
 #include "Char.h"
 #include "Defines.h"
 
-
 #define fori(x,iterator) for(int iterator = 0 ; iterator < x ; iterator++)
 
 typedef char byte_t;
 
-void printHelpPage() {
+void inline printHelpPage() {
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  RSA DEMO  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
     std::cout << "     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
@@ -53,8 +52,6 @@ inline bool exists(const std::string& name) {
     std::ifstream f(name.c_str());
     return f.good();
 }
-
-std::string keyFolderPath = "./Keys";
 
 bool Encrypt(const std::string& filename, std::string outputFile , RSA::Key& key) {
 
@@ -150,7 +147,8 @@ int main(int argc, char** argv)
     if (input.optionExists("-e")) {
         mode = encryption;
     }
- 
+    
+    //-e and -d
     if (input.optionExists("-e") && input.optionExists("-d")) {
         std::cout << "Cannot use encryption mode and decryption mode at the same time!";
         END;

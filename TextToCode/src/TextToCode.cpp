@@ -9,7 +9,7 @@
 std::cin.get(); \
 return 0;
 
-const std::string functionDeclBegin = "void ";
+const std::string functionDeclBegin = "void inline";
 const std::string functionDeclEnd = "(){\n";
 std::string functionName = "printText";
 
@@ -18,7 +18,7 @@ inline bool exists(const std::string & name) {
     return f.good();
 }
 
-void printHelp() {
+void inline printHelp() {
     std::cout << "" << "\n";
     std::cout << "" << "\n";
     std::cout << "-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#" << "\n";
