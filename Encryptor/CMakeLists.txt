@@ -10,7 +10,7 @@ file(GLOB sources
 add_executable(Encryptor ${sources})
 
 #MyRSA
-set(MyRSA_BUILD_SHARED TRUE)
+set(MyRSA_BUILD_SHARED OFF)
 add_subdirectory(dependencies/MyRSA)
 add_dependencies(Encryptor MyRSA::MyRSA)
 

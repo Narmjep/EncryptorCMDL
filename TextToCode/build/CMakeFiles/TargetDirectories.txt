@@ -1,3 +1,0 @@
-C:/Users/rapha/Downloads/CMAKE/TextToCode/build/CMakeFiles/TTC.dir
-C:/Users/rapha/Downloads/CMAKE/TextToCode/build/CMakeFiles/edit_cache.dir
-C:/Users/rapha/Downloads/CMAKE/TextToCode/build/CMakeFiles/rebuild_cache.dir
