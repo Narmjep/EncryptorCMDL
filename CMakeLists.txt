@@ -6,7 +6,7 @@ ENDIF()
 
 add_subdirectory(Encryptor)
 
-option(BUILD_TEXTTOCODE "Set this to true to additionally build the TextToCode Program." TRUE)
+option(BUILD_TEXTTOCODE "Set this to true to additionally build the TextToCode Program." FALSE)
 
 if(${BUILD_TEXTTOCODE})
 

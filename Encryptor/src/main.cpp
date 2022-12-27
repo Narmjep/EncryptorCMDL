@@ -255,7 +255,7 @@ int main(int argc, char** argv)
     case encryption:
         {
             //encryption mode
-            RSA::Key publicKey(pubKeyName);
+            RSA::Key publicKey(keyfile);
             Encrypt(inputFile, outputFile, publicKey);
             END;
             break;
@@ -266,7 +266,7 @@ int main(int argc, char** argv)
             if (input.optionParamExists("-o") == false) {
                 outputFile = "";
             }
-            RSA::Key privateKey(privKeyName);
+            RSA::Key privateKey(keyfile);
             Decrypt(inputFile, privateKey, outputFile);
             END;
             break;
