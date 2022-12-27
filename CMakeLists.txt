@@ -2,9 +2,9 @@ project(EncryptorCMDL)
 
 add_subdirectory(Encryptor)
 
-option(Build_TextToCode FALSE)
+option(BUILD_TextToCode FALSE)
 
-if(Build_TextToCode)
+if(${BUILD_TextToCode})
 message("Building TextToCode")
     add_subdirectory(TxtToCode)
 endif()
