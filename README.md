@@ -12,7 +12,7 @@ Run
 ```bash
 ./Encryptor -h
 ```
-to view the [help page](https://github.com/Narmjep/EncryptorCMDL/blob/CMake/TextToCode/rc/help.txt)
+to view the [help page](https://github.com/Narmjep/EncryptorCMDL/blob/CMake/TextToCode/rc/Help.txt)
 
 ## Build
 Use CMake to build the projects. Simply run:
