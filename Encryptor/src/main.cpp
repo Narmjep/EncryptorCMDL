@@ -9,7 +9,7 @@
 #include "Defines.h"
 
 
-#define fori(x) for(int i = 0 ; i < x ; i++)
+#define fori(x,iterator) for(int iterator = 0 ; iterator < x ; iterator++)
 
 typedef char byte_t;
 
@@ -56,7 +56,7 @@ inline bool exists(const std::string& name) {
 
 std::string keyFolderPath = "./Keys";
 
-bool Encrypt(const std::string& filename, std::string outputFile , RSA::Key key) {
+bool Encrypt(const std::string& filename, std::string outputFile , RSA::Key& key) {
 
     //Get Input file
     std::fstream inputFile(filename);
@@ -84,14 +84,14 @@ bool Encrypt(const std::string& filename, std::string outputFile , RSA::Key key)
 
     //Write to File
     std::ofstream file(outputFile , std::ios::out | std::ios::binary);
-    fori(msgLen) {
+    fori(msgLen,i) {
         file.write((char*)&int_encrypted[i], sizeof(int));
     }
     
     return true;
 }
 
-bool Decrypt(const std::string& filename, RSA::Key priv, std::string outputFile = "") {
+bool Decrypt(const std::string& filename, RSA::Key& priv, std::string outputFile = "") {
     //Get Input file
     std::fstream inputFile(filename, std::ios::in | std::ios::binary);
 
@@ -142,7 +142,6 @@ int main(int argc, char** argv)
     //! Check mode
     
     //-d
-    //TODO Decryption Mode
     if (input.optionExists("-d")) {
         mode = decryption;
     }
@@ -220,7 +219,7 @@ int main(int argc, char** argv)
     //pub
     std::string pubKeyName = "./Keys/Pub.key";
     if (input.optionExists("-pub") && input.optionParamExists("-pub")) {
-        privKeyName = input.getOptionParam("-pub");
+        pubKeyName = input.getOptionParam("-pub");
     }
 
 

@@ -1,0 +1,3 @@
+[submodule "Encryptor/dependencies/MyRSA"]
+	path = Encryptor/dependencies/MyRSA
+	url = https://github.com/Narmjep/MyRSA.git
