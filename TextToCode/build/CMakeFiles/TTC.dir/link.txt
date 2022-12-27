@@ -1,0 +1,3 @@
+"E:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\TTC.dir/objects.a
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe qc CMakeFiles\TTC.dir/objects.a @CMakeFiles\TTC.dir\objects1.rsp
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE -Wl,--whole-archive CMakeFiles\TTC.dir/objects.a -Wl,--no-whole-archive -o TTC.exe -Wl,--out-implib,libTTC.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TTC.dir\linklibs.rsp
