@@ -8,6 +8,8 @@
 #include "Char.h"
 #include "Defines.h"
 
+#define DEFAULT_COMPLEXITY 5000
+
 #define fori(x,iterator) for(int iterator = 0 ; iterator < x ; iterator++)
 
 typedef char byte_t;
@@ -123,8 +125,6 @@ bool Decrypt(const std::string& filename, RSA::Key& priv, std::string outputFile
 }
 
 
-
-
 int main(int argc, char** argv)
 {
     srand(time(NULL));
@@ -157,13 +157,13 @@ int main(int argc, char** argv)
     //! Options
 
     //-c
-    unsigned int complexity = 100;
+    unsigned int complexity = DEFAULT_COMPLEXITY;
     if (input.optionExists("-c") && input.optionParamExists("-c")) {
         complexity = std::stoi(input.getOptionParam("-c"));
     }
 
     //-k
-    int key[2];
+    //int key[2];
     std::string keyfile;
 
     if (mode != keys) {
