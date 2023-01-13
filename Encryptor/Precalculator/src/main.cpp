@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#define DEFAULT_RANGE 1024
+#define DEFAULT_RANGE 8192
 #define START 7
 
 void writeToFile(std::ofstream& file, int number){
