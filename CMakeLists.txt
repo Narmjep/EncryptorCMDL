@@ -1,8 +1,5 @@
 project(EncryptorCMDL)
 
-IF(POLICY CMP0012)
-    CMAKE_POLICY(SET CMP0012 NEW)
-ENDIF()
 
 #Encryptor
 add_subdirectory(Encryptor)
@@ -11,7 +8,8 @@ option(BUILD_TEXTTOCODE "Set this to true to additionally build the TextToCode P
 
 if(${BUILD_TEXTTOCODE})
 message("Building TextToCode")
-    add_subdirectory(TextToCode)
+    add_subdirectory(TextToCode ${CMAKE_CURRENT_BINARY_DIR})
 else()
 message("Ignoring TextToCode")
 endif()
+
