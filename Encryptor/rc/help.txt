@@ -1,5 +1,5 @@
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  RSA DEMO  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 ~~~  									    RSA DEMO  											~~~~
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 How to use:
@@ -11,7 +11,9 @@ CMD: RSA [-priv] [-pub]
 		
 		-c (x) : Set the largest prime number that can be used for the key generation. The default value is 100.
 
-		-d : Set the program in decryption mode. When decrypting, use the -p switch.
+		-d : Set the program in decryption mode. When decrypting, use the -k switch.
+
+		-e : Set the program in encryption mode. When decrypting, use the -k switch.
 
 		-h : Displays this help menu;
 
@@ -21,14 +23,11 @@ CMD: RSA [-priv] [-pub]
 
 		-k (file) : Set the key used in encryption / decryption.
 
-		-o (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it can be overwritten using the switch -O.
-
-		-O (file) : Set the name of the outputfile containing the encrypted data, that will be generated. If the file already exists it will be overwritten.
+		-o (file) : Set the name of the output file containing the encrypted data, that will be generated.
 		
 		-priv (file) : Sets the name of the private key file that will be created. The default is "Priv.key".
 
 		-pub (file) : Sets the name of the public key file that will be created. The default is "Pub.key".
 
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
